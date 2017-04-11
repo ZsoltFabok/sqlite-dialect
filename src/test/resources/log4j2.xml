@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorinterval="30" status="info" strict="true">
+    <Appenders>
+        <Appender type="Console" name="Console">
+            <Layout type="PatternLayout" pattern="%d %p [%t] %m%n" />
+        </Appender>
+    </Appenders>
+    <Loggers>
+        <Root level="warn">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</Configuration>

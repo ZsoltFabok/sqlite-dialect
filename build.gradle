@@ -1,0 +1,19 @@
+task wrapper(type: Wrapper) {
+  gradleVersion = '3.2.1'
+}
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.hibernate:hibernate-core:5.1.0.Final")
+    testCompile("junit:junit:4.12")
+    testCompile("org.powermock:powermock-mockito-release-full:1.6.4")
+    testCompile("org.apache.logging.log4j:log4j-core:2.8.1")
+}

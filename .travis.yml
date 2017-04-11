@@ -1,0 +1,8 @@
+language: java
+jdk:
+  - oraclejdk8
+script:
+  - gradlew test
+
+# skip gradle assemble (skip the install step)
+install: true
