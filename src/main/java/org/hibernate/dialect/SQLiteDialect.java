@@ -12,6 +12,9 @@ import org.hibernate.type.StandardBasicTypes;
 
 import java.sql.Types;
 
+/**
+ * SQLite dialect for hibernate 5.
+ */
 public class SQLiteDialect extends Dialect {
     public SQLiteDialect() {
         registerColumnType(Types.BIT, "boolean");

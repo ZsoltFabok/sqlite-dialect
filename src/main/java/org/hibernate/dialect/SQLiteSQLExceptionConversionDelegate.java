@@ -14,6 +14,9 @@ import org.hibernate.internal.util.JdbcExceptionHelper;
 import java.sql.SQLException;
 
 
+/**
+ * Exception converter for the SQLite dialect.
+ */
 public class SQLiteSQLExceptionConversionDelegate implements SQLExceptionConversionDelegate {
 
     private static final int SQLITE_BUSY = 5;

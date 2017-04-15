@@ -7,6 +7,9 @@ import org.hibernate.dialect.pagination.LimitHelper;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/**
+ * Limit handler for the SQLite dialect.
+ */
 public class SQLiteLimitHandler implements LimitHandler {
 
     @Override
