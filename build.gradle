@@ -4,6 +4,9 @@ task wrapper(type: Wrapper) {
 
 apply plugin: 'java'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 repositories {
     mavenCentral()
 }
@@ -13,4 +16,98 @@ dependencies {
     testCompile("junit:junit:4.12")
     testCompile("org.powermock:powermock-mockito-release-full:1.6.4")
     testCompile("org.apache.logging.log4j:log4j-core:2.8.1")
+}
+
+// for the sonatype release
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+version = '1.0-SNAPSHOT'
+String group = 'com.zsoltfabok'
+
+String pomName = 'sqlite-dialect'
+String pomRepositoryUrl = 'https://github.com/ZsoltFabok/sqlite-dialect'
+String pomScmUrl = 'scm:git:git@github.com:ZsoltFabok/sqlite-dialect.git'
+String pomDescription = 'SQLite dialect for hibernate 5'
+String pomLicenseName = 'The BSD 3-Clause License'
+String pomLicenseUrl = 'https://opensource.org/licenses/BSD-3-Clause'
+String pomDeveloperId = 'fabokzs'
+String pomDeveloperEmail = 'info@zsoltfabok.com'
+String pomDeveloperName = 'Zsolt Fabok'
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives jar, javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+// Because if one does not want to release and therefore does not have gradle.properties
+// the whole build will fail because the uploadArchives is being evaluated and sonatypeUsername
+// and sonatypePassword is not going to be present
+// using '<<' in uploadArchives could be an option, but it is deprecated
+def getSonatypeProperty(String name) {
+    name = 'sonatype' + name.capitalize()
+    if (project.hasProperty(name)) {
+        return project.getProperties()[name]
+    } else {
+        return ''
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: getSonatypeProperty('username'), password: getSonatypeProperty('password'))
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: getSonatypeProperty('username'), password: getSonatypeProperty('password'))
+            }
+
+            pom.project {
+                name pomName
+                description pomDescription
+                url pomRepositoryUrl
+                version version
+                groupId group
+                artifactId pomName
+                packaging 'jar'
+                scm {
+                    connection pomScmUrl
+                    developerConnection pomScmUrl
+                    url pomScmUrl
+                }
+                licenses {
+                    license {
+                        name pomLicenseName
+                        url pomLicenseUrl
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id pomDeveloperId
+                        name pomDeveloperName
+                        email pomDeveloperEmail
+                    }
+                }
+            }
+        }
+    }
 }

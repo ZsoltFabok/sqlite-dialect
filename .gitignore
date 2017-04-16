@@ -2,3 +2,6 @@ build
 .idea
 log
 .gradle
+
+# ignore passwords, keys etc
+gradle.properties
