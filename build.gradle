@@ -1,8 +1,14 @@
+plugins {
+    id "java"
+    // for coverage
+    id "jacoco"
+    // for coveralls.io if it starts to work - until then codecov
+    // id "com.github.kt3k.coveralls" version "2.6.3"
+}
+
 task wrapper(type: Wrapper) {
   gradleVersion = '3.2.1'
 }
-
-apply plugin: 'java'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -16,6 +22,14 @@ dependencies {
     testCompile("junit:junit:4.12")
     testCompile("org.powermock:powermock-mockito-release-full:1.6.4")
     testCompile("org.apache.logging.log4j:log4j-core:2.8.1")
+}
+
+// coverage
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
 }
 
 // for the sonatype release

@@ -2,6 +2,7 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.zsoltfabok/sqlite-dialect/badge.png)](https://maven-badges.herokuapp.com/maven-central/com.zsoltfabok/sqlite-dialect/)
 [![Build Status](https://travis-ci.org/ZsoltFabok/sqlite-dialect.svg?branch=master)](https://travis-ci.org/ZsoltFabok/sqlite-dialect)
 [![codebeat badge](https://codebeat.co/badges/5d552b87-552c-4d5f-877b-444a4f3c8dc7)](https://codebeat.co/projects/github-com-zsoltfabok-sqlite-dialect-master)
+[![codecov](https://codecov.io/gh/ZsoltFabok/sqlite-dialect/branch/master/graph/badge.svg)](https://codecov.io/gh/ZsoltFabok/sqlite-dialect)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://github.com/ZsoltFabok/sqlite-dialect/blob/master/LICENSE.md)
 
 ### Test
